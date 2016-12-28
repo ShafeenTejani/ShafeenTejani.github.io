@@ -31,7 +31,7 @@ A traditional fully connected neural network architecture looks something like t
 
 
 <p align="center">
-  <img src="{{site.url}}/assets/images/fully_connected_network_666.png"/>
+  <img src="{{site.url}}/assets/images/fully_connected_network.png"/>
 </p>
 
 Every neuron in a given layer is connected to every neuron in the following layer, with a weight being assigned to each connection. This network is essentially defining a complex function between the inputs in the first layer and the outputs in the last layer. The weights connecting each neuron are parameters which are tweaked by training the network to learn a specific function, for example to tell whether an image contains a lion or a tiger.
