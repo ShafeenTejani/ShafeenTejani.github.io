@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Artistic style transfer using deep neural networks"
+title:  "Artistic Style Transfer with Deep Neural Networks"
 date:   2016-12-27 22:01:44 +0000
 categories:
 ---
@@ -18,8 +18,7 @@ Having recently played with the new [Prisma app](http://prisma-ai.com/) I was am
   <img src="{{site.url}}/assets/images/style_transfer/prisma_boat.png" style="margin-left: 0.5em;"/>
 </p>
 
-It's no surprise that neural networks are at the heart of this capability. The first major step in this field was introduced in the paper [An Neural Algorithm of Artistic Style](https://arxiv.org/abs/1508.06576) in September 2015. Gatys et. al show that the task of transferring the style from one image to the content of another can be posed as an minimisation problem which can be solved through training a neural network. In this post I'll attempt to briefly summarise the main concepts from the paper and share some results I obtained from my own implementation of the algorithm in TensorFlow.
-
+It's no surprise that neural networks are at the heart of this capability. The first major step in this field was introduced in the paper [A Neural Algorithm of Artistic Style](https://arxiv.org/abs/1508.06576) in September 2015. Gatys et. al show that the task of transferring the style from one image to the content of another can be posed as an optimisation problem which can be solved through training a neural network. In this post I'll attempt to briefly summarise the main concepts from the paper and share some results I obtained from my own implementation of the algorithm in TensorFlow.
 
 # Convolutional neural networks
 
@@ -31,7 +30,7 @@ In their paper, Gatys et. al show that if we take a convolutional neural network
 
 One of the most popular benchmarks for image recognition algorithms today is the [ImageNet Large Scale Visual Recognition Challenge](http://image-net.org/challenges/LSVRC/2016/index) - where teams compete to create algorithms which classify objects contained within millions images into one of 1,000 different categories. All winning architectures in recent years have been some form of convolutional neural network - with the most recent winners even being able to surpass human level performance!
 
-In 2014, the winner of the ImageNet competition was [a network created by the Visual Geometry Group](http://www.robots.ox.ac.uk/~vgg/research/very_deep/) (VGG) at Oxford University, achieving a classification error rate of only 7.0%. Gatys et. al use this network - which has been trained to be extremely effective at object detection - as a basis for trying to extract content and style representations from images.
+In 2014, the winner of the ImageNet challenge was [a network created by the Visual Geometry Group](http://www.robots.ox.ac.uk/~vgg/research/very_deep/) (VGG) at Oxford University, achieving a classification error rate of only 7.0%. Gatys et. al use this network - which has been trained to be extremely effective at object detection - as a basis for trying to extract content and style representations from images.
 
 Here's a diagram of the VGG network:
 
@@ -43,15 +42,18 @@ It consists of 16 layers of convolution and ReLU non-linearity, separated by 5 p
 
 # Content representation
 
-The main building block of convolutional neural networks are convolution layers. This is where a set of feature detectors are applied to an image to produce a feature map, which is essentially a filtered version of the image.
+The main building blocks of convolutional neural networks are the convolution layers. This is where a set of feature detectors are applied to an image to produce a feature map, which is essentially a filtered version of the image.
 
-Networks that have been trained for the task of object recognition learn which features it is important to extract from an image in order to identify its content. The feature maps in the convolution layers of a network can be seen as the network's internal representation of the image content. As we go deeper into the network these convolutional layers are able to represent much larger scale features and thus have a higher-level representation of the image content.
+Networks that have been trained for the task of object recognition learn which features it is important to extract from an image in order to identify its content. The feature maps in the convolution layers of the network can be seen as the network's internal representation of the image content. As we go deeper into the network these convolutional layers are able to represent much larger scale features and thus have a higher-level representation of the image content.
 
 We can demonstrate this by constructing images whose feature maps at a chosen convolution layer match the corresponding feature maps of a given content image. We expect the two images to contain the same content - but not necessarily the same texture and style.
 
-[ can I do this with the dog ]
+<p align="center" style="margin-top:2em;margin-bottom:2em;">
+  <img src="{{site.url}}/assets/images/style_transfer/object_reconstruction.png"/>
+</p>
 
-We can see that as the layers become deeper the images still preserve the high-level content of the original but lose the exact pixel information.
+
+We can see that as we reconstruct the original image from deeper layers we still preserve the high-level content of the original but lose the exact pixel information.
 
 # Style representation
 
@@ -71,7 +73,7 @@ The diagram below shows images that have been constructed to match the style rep
 
 [ style reconstructions ]
 
-# Style transfer as a minimisation problem
+# Style transfer as an optimisation problem
 
 Style transfer is the task of generating a new image $$Y$$, whose style is equal to a style image $$S$$ and whose content is equal to a content image $$C$$.
 Now that we have a clear definition of the style and content representation of an image we can define a loss function which essentially shows us how far away our generated image $$Y$$ is from being a perfect style transfer.
@@ -122,7 +124,7 @@ To describe it simply, we first pass the image through the VGG network to calcul
 
 # Results
 
-Here are some of the best results achieved by Gatys et. al.
+Here are some of the best results achieved by Gatys et. al:
 
 <p align="center" style="margin-top:2em;margin-bottom:2em;">
   <img src="{{site.url}}/assets/images/style_transfer/gatys_results.png"/>
@@ -133,4 +135,18 @@ The content image of the Neckarfront in Tübingen, Germany has been styled with 
 
 # TensorFlow implementation
 
-You can find my own TensorFlow implementation of this method of style transfer on my [GitHub repository](https://github.com/ShafeenTejani/style-transfer). Here are some of the style transfers I was able to generate:
+You can find my own TensorFlow implementation of this method of style transfer on my [GitHub repository](https://github.com/ShafeenTejani/style-transfer). I generated style transfers using the following three style images:
+
+<p align="center" style="margin-top:2em;margin-bottom:2em;">
+  <img src="{{site.url}}/assets/images/fast_style_transfer/style_images.png"/>
+</p>
+
+Each optimisation was run for ... iterations on a ... GPU and took approximately 2 minutes. Here are some of the style transfers I was able to generate:
+
+
+<p align="center" style="margin-top:2em;margin-bottom:2em;">
+  <img src="{{site.url}}/assets/images/style_transfer/tensorflow_results.png"/>
+</p>
+
+
+If you found this post about style transfer interesting [click here to read my next post about performing style transfer in real-time]({{ site.baseurl }}{% post_url 2016-12-30-fast-style-transfer %}).
