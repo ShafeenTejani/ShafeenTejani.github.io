@@ -2,7 +2,7 @@
 layout: post
 title:  "Artistic Style Transfer with Deep Neural Networks"
 date:   2016-12-27 22:01:44 +0000
-categories:
+description: "Transferring the style of one image onto the content of another"
 ---
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
@@ -20,13 +20,13 @@ Having recently played with the new [Prisma app](http://prisma-ai.com/) I was am
 
 It's no surprise that neural networks are at the heart of this capability. The first major step in this field was introduced in the paper [A Neural Algorithm of Artistic Style](https://arxiv.org/abs/1508.06576) in September 2015. Gatys et. al show that the task of transferring the style from one image to the content of another can be posed as an optimisation problem which can be solved through training a neural network. In this post I'll attempt to briefly summarise the main concepts from the paper and share some results I obtained from my own implementation of the algorithm in TensorFlow.
 
-# Convolutional neural networks
+## Convolutional neural networks
 
 The most effective neural network architecture for performing object detection within images is the convolutional neural network. It works by detecting features at larger and larger scales within an image and using non-linear combinations of these feature detections to recognise objects. See my [earlier blog post]({{ site.baseurl }}{% post_url 2016-12-20-convolutional-neural-nets %}) for a more detailed explanation of these networks.
 
 In their paper, Gatys et. al show that if we take a convolutional neural network that has already been trained to recognise objects within images then that network will have developed some internal representations of the content and style contained within a given image. What's more, these representations will be independent from each other, so we can use the content representation from one image and style representation from another to generate a brand new image.
 
-# VGG network
+## VGG network
 
 One of the most popular benchmarks for image recognition algorithms today is the [ImageNet Large Scale Visual Recognition Challenge](http://image-net.org/challenges/LSVRC/2016/index) - where teams compete to create algorithms which classify objects contained within millions images into one of 1,000 different categories. All winning architectures in recent years have been some form of convolutional neural network - with the most recent winners even being able to surpass human level performance!
 
@@ -40,7 +40,7 @@ Here's a diagram of the VGG network:
 
 It consists of 16 layers of convolution and ReLU non-linearity, separated by 5 pooling layers and ending in 3 fully connected layers. Let's see how we can extract representations of the content and style of images from the various layers of this network.
 
-# Content representation
+## Content representation
 
 The main building blocks of convolutional neural networks are the convolution layers. This is where a set of feature detectors are applied to an image to produce a feature map, which is essentially a filtered version of the image.
 
@@ -55,7 +55,7 @@ We can demonstrate this by constructing images whose feature maps at a chosen co
 
 We can see that as we reconstruct the original image from deeper layers we still preserve the high-level content of the original but lose the exact pixel information.
 
-# Style representation
+## Style representation
 
 Unlike content representation, the style of an image is not well captured by simply looking at the values of a feature map in a convolutional neural network trained for object recognition.
 
@@ -73,7 +73,7 @@ The diagram below shows images that have been constructed to match the style rep
 
 [ style reconstructions ]
 
-# Style transfer as an optimisation problem
+## Style transfer as an optimisation problem
 
 Style transfer is the task of generating a new image $$Y$$, whose style is equal to a style image $$S$$ and whose content is equal to a content image $$C$$.
 Now that we have a clear definition of the style and content representation of an image we can define a loss function which essentially shows us how far away our generated image $$Y$$ is from being a perfect style transfer.
@@ -109,7 +109,7 @@ $$
 Performing the task of style transfer can now be reduced to the task of trying to generate an image $$Y$$ which minimises the loss function.
 
 
-# Styling an image
+## Styling an image
 
 The total loss equation lets us know how far we are away from achieving our goal of producing a style transferred image Y. But how do we go about getting there?
 
@@ -122,7 +122,7 @@ To describe it simply, we first pass the image through the VGG network to calcul
 </p>
 
 
-# Results
+## Results
 
 Here are some of the best results achieved by Gatys et. al:
 
@@ -133,7 +133,7 @@ Here are some of the best results achieved by Gatys et. al:
 The content image of the Neckarfront in Tübingen, Germany has been styled with four different famous paintings, each producing a very pleasing blend of content and style.
 
 
-# TensorFlow implementation
+## TensorFlow implementation
 
 You can find my own TensorFlow implementation of this method of style transfer on my [GitHub repository](https://github.com/ShafeenTejani/style-transfer). I generated style transfers using the following three style images:
 

@@ -3,10 +3,10 @@ layout: post
 title:  "Machines that can see:
 Convolutional Neural Networks"
 date:   2016-12-20 22:01:44 +0000
-categories:
+description: "An overview of the most successful neural network architecture for image recognition"
 ---
 
-# What does it mean to see?
+## What does it mean to see?
 
 Look at these two images:
 
@@ -25,7 +25,7 @@ In fact, image recognition is currently a very popular use of neural networks an
 
 In this blog post I hope to briefly outline one of the most successful neural network architectures for image recognition tasks; convolutional neural networks. To motivate the need for convolutional neural networks let's start by looking at the simplest form of network architecture, which is the fully connected network.
 
-# Fully connected networks
+## Fully connected networks
 
 A traditional fully connected neural network architecture looks something like this:
 
@@ -52,7 +52,7 @@ The number of weights we would need to learn for this network is approximately *
 
 Given these practical considerations, a different architecture called convolutional neural networks have become much more popular for image recognition tasks. They work by detecting patterns at various scales within an image and using these to identify objects within the image. Significantly, they require many orders of magnitude less weights to train and as a result have become the standard.
 
-# Convolutional neural networks
+## Convolutional neural networks
 
 Here's an example of a convolutional neural network:
 
@@ -62,7 +62,7 @@ Here's an example of a convolutional neural network:
 
 It consists of a number of layers of convolution, non-linearity and pooling, followed by a final set of fully connected layers. Let’s break down each of these types of layers.
 
-#### Convolution
+### Convolution
 
 The main building blocks of convolutional neural networks are the convolution layers, which are used to detect the presence of features within an image. Features could be anything from simple edges and curves to more complex structures like ears, noses and eyes.
 
@@ -93,7 +93,7 @@ Finally, we can also get an intuition for the number of weights we need to learn
 
 Which is drastically smaller than the 15 million weights we required to train our fully connected network earlier!
 
-#### Non-linearity (ReLU)
+### Non-linearity (ReLU)
 
 Neural networks attempt to learn a function by taking a combination of all of the functions at each stage in the network. Convolution is a linear operation, so  combining many convolution layers will still only allow us to learn a linear function. This unfortunately is not adequate for most real-world tasks we would want to solve, including our example of image recognition. In order to allow our network to learn more complex non-linear functions we need to introduce some non-linearity.
 
@@ -103,7 +103,7 @@ In convolutional neural networks this is done by applying a non-linear function 
   <img src="{{site.url}}/assets/images/relu.png"/>
 </p>
 
-#### Pooling
+### Pooling
 
 Feature maps give us a detailed picture of where specific features occur within an input image. For image recognition tasks we don't always need to know the exact pixel locations of the features we detect. For example, if our tiger image was shifted slightly to the right - it would still be an image of a tiger, even if it's eyes and ears and mouth are now a few pixels across. The pooling operation helps to introduce this desired positional invariance into our networks.
 
@@ -116,7 +116,7 @@ The most common method of pooling is max-pooling, where the the maximum value of
 </p>
 
 
-#### Higher Level Features
+### Higher Level Features
 
 As a convolutional neural network gets deeper the feature maps in the convolution layers are able to pick out more and more complex features.
 
@@ -126,12 +126,12 @@ Why is this? It can be explained by the concept of the receptive field of a kern
 
 After a 2×2 pooling layer, each element in the pooled feature map is influenced by 4 pixels from the original input image. The 2×2 kernel in the next convolution layer will now be influenced by 16 pixels from the input image. As the convolution layers get deeper each kernel is able to "see" a much large part of the input image and can therefore detect more complex features. This is why as a convolutional neural network grows larger we are able to detect much larger structures, eventually allowing us to classify lions and tigers.
 
-#### Fully Connected layer
+### Fully Connected layer
 
 Most convolutional neural networks end with one or more fully connected layers. This allows the network to learn a function which maps the final layer of high-level feature maps to each of the image classifications. For example, if my image contains two eyes, a nose, sharp teeth and a body with stripes I may be very confident that it's a picture of a tiger.
 
 
-# Further Reading
+## Further Reading
 
 Hopefully this post has provided a decent introduction to how we can use neural networks to enable machines to intelligently process images. For those interested in reading more about convolutional neural networks I've compiled a short list of resources I found extremely useful in helping me to write this blog post:
 

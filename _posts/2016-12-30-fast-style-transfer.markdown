@@ -2,7 +2,7 @@
 layout: post
 title:  "Style Transfer in Real-Time"
 date:   2016-12-30 18:01:44 +0000
-categories:
+description: "How can we perform a style transfer within seconds on a mobile device?"
 ---
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
@@ -17,7 +17,7 @@ In my [previous post]({{ site.baseurl }}{% post_url 2016-12-27-style-transfer %}
 To generate them on a CPU would've taken around 36 hours each. So how do apps such as [Prisma](http://prisma-ai.com/) allow users to apply different styles to a content image and run this on a mobile device within seconds rather than hours?
 
 
-# Real-time style transfer
+## Real-time style transfer
 
 In March 2016 a group of researchers from Stanford University published a paper which outlined a method for achieving real-time style transfer. They were able to train a neural network to apply a single style to any given content image. Given this ability, a different network could be trained for each different style we wish to apply.
 
@@ -25,7 +25,7 @@ The paper, titled [Perceptual Losses for Real-Time Style Transfer and Super-Reso
 
 In this post I'll give an overview of the method they propose and share some results I obtained from my own implementation in TensorFlow.
 
-# Learning to optimise
+## Learning to optimise
 
 The [original algorithm]({{ site.baseurl }}{% post_url 2016-12-27-style-transfer %}) proposed by Gatys et. al formulated a loss function for style transfer and reduced the problem down to one of optimising this loss function. Johnson et. al show that, if we limit ourselves to a single style image, we can train a neural network to solve this optimisation problem for us in real-time and transform any given content image into a styled version.
 
@@ -44,7 +44,7 @@ Given this system, we can then train the image transformation network to reduce 
 
 Training involves using the loss network to evaluate the loss for a given training example and then propagating this error back through every layer in the image transformation network. At each layer we compute the gradient of the layer's weights with respect to the loss function and use this to make a small adjustment to the weights in the negative direction of the gradient. This will iteratively improve the performance of the network until the loss is below an acceptable threshold. This technique is known as gradient descent via backpropagation and iteratively improves the network weights to reduce the value of the loss function. You can read more about it [here](http://neuralnetworksanddeeplearning.com/chap2.html).
 
-# Image transformation network
+## Image transformation network
 
 The diagram below shows the architecture for the image transformation network laid out by Johnson et. al:
 
@@ -54,7 +54,7 @@ The diagram below shows the architecture for the image transformation network la
 
 It consists of 3 layers of convolution and ReLU non-linearity, 5 residual blocks, 3 transpose convolutional layers and finally a non-linear tanh layer which produces an output image. Let's briefly describe what each of these layers are doing.
 
-#### Downsampling with strided convolution
+### Downsampling with strided convolution
 
 Convolution layers are used to apply filters to an input image. This is done by moving a fixed-size kernel filter across the input image and applying the convolution operation to the pixels within the kernel window to compute each corresponding pixel in the output image. By default, after each convolution operation we move the kernel window across by 1 pixel. This is known as stride 1 convolution.
 
@@ -87,7 +87,7 @@ The main reason for including downsampling layers in a convolutional neural netw
 
 An alternative way to introduce downsampling in this convolution neural network would have been through a pooling layer which also reduces the image size.
 
-#### Upsampling with fractionally strided convolution
+### Upsampling with fractionally strided convolution
 
 After applying both stride 2 convolution layers our image resolution is reduced to $$\frac{1}{4}$$ of it's original size. The desired output of our transformation network is a styled image with the same resolution as the original content image. In order to achieve this we introduce two convolution layers with stride $$\frac{1}{2}$$. These are sometimes referred to as transpose convolution layers or deconvolution layers. These layers have the effect of increasing the output image size, which is known as **upsampling**.
 
@@ -99,7 +99,7 @@ Convolution with stride $$\frac{1}{2}$$ involves moving the kernel window across
 
 This achieves the same effect of double the image resolution and results in the final image being the same resolution as our original input image.
 
-#### Residual layers
+### Residual layers
 
 Between the downsampling and upsampling layers we have 5 residual layers. These are stride 1 convolution layers but the difference between these and normal convolution layers is that we add the input of the network back to the generated output.
 
@@ -111,7 +111,7 @@ The reason for using residual layers in a network is that for certain tasks it m
 
 For a task like style transfer using residual layers makes sense as we know that our generated output image should be somewhat similar to our input image so we can help the network by only requiring it to learn the residual.
 
-#### Constraining the output with a tanh layer
+### Constraining the output with a tanh layer
 
 In order to process an image in a neural network it is first represented as a matrix of integers which are the values of each pixel in the image. These have a range of 0 to 255. Each layer in a neural network performs a mathematical operation on its input to produce an output and there is no inherent constraint in these layers that keeps the output bounded between 0 and 255.
 
@@ -125,7 +125,7 @@ The $$\tanh$$ function is bound between -1 and 1 so by applying this and rescali
 
 $$output(x) = 255\times{\frac{\tanh(x) + 1}{2}}$$
 
-# Results
+## Results
 
 Here is a sample of some of the results achieved by Johnson et. al:
 
@@ -137,7 +137,7 @@ Here is a sample of some of the results achieved by Johnson et. al:
 
 The image transformation networks were trained on 80,000 training images taken from the [Microsoft COCO dataset](http://mscoco.org/) and resized to 256×256 pixels. Training was carried out for 40,000 iterations with a batch size of 4. On a GTX Titan X GPU training each network took approximately 4 hours and image generation took 15 milliseconds on average.
 
-# TensorFlow implementation
+## TensorFlow implementation
 
 You can find my own TensorFlow implementation of real-time style transfer [here](https://github.com/ShafeenTejani/fast-style-transfer). I trained three networks on the following three style images:
 

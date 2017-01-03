@@ -1,0 +1,19 @@
+<header class="header">
+  <h1 class="header-title">
+    <a href="{{ site.url }}{{ site.baseurl }}">{{ site.name }}</a>
+    {% if site.author.blurb %}
+    <div><span id="blurb">{{ site.author.blurb }}</span></div>
+    {% endif %}
+  </h1>
+  <img class="header-profile" src="{{site.url}}/assets/images/profile.jpg"/>
+  <hr style="clear:both;"/>
+  <nav class="header-nav">
+    {% for nav in site.nav %}
+    {% if nav.url contains 'http://' or nav.url contains 'https://' %}
+    <a href="{{ nav.url }}">{{ nav.name }}</a>
+    {% else %}
+    <a href="{{ nav.url | prepend: site.baseurl }}">{{ nav.name }}</a>
+    {% endif %}
+    {% endfor %}
+  </nav>
+</header>
