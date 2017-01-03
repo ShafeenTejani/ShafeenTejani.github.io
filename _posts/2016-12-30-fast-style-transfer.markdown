@@ -145,7 +145,7 @@ You can find my own TensorFlow implementation of real-time style transfer [here]
   <img src="{{site.url}}/assets/images/fast_style_transfer/style_images.png"/>
 </p>
 
-Each network was trained with 80,000 training images taken from the [Microsoft COCO dataset](http://mscoco.org/) and resized to 256×256 pixels. Training was carried out for 100,000 iterations with a batch size of 4 and took approximately 12 hours on a GTX 1080 GPU. the Here are some of the style transfers I was able to generate:
+Each network was trained with 80,000 training images taken from the [Microsoft COCO dataset](http://mscoco.org/) and resized to 256×256 pixels. Training was carried out for 100,000 iterations with a batch size of 4 and took approximately 12 hours on a GTX 1080 GPU. Here are some of the style transfers I was able to generate:
 
 <p align="center" style="margin-top:2em;margin-bottom:2em;">
   <img src="{{site.url}}/assets/images/fast_style_transfer/tensorflow_results.png"/>
