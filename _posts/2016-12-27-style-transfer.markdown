@@ -69,9 +69,14 @@ $$
 
 As with the content representation, if we had two images whose feature maps at a given layer produced the same Gram matrix we would expect both images to have the same style, but not necessarily the same content. Applying this to early layers in the network would capture some of the finer textures contained within the image whereas applying this to deeper layers would capture more higher-level elements of the image's style. Gatys et. al found that the best results were achieved by taking a combination of shallow and deep layers as the style representation for an image.
 
-The diagram below shows images that have been constructed to match the style representation of ... We can see that the best results are achieved by a combination of different layers from the network.
+The diagram below shows images that have been constructed to match the style representation of Pablo Picasso's 'Portrait of Dora Maar'. Results are shown for combining an increasing number of layers to represent the image's style.
 
-[ style reconstructions ]
+<p align="center" style="margin-top:2em;margin-bottom:2em;">
+  <img src="{{site.url}}/assets/images/style_transfer/style_reconstruction.png"/>
+</p>
+
+We can see that the best results are achieved by a combination of many different layers from the network, which capture both the finer textures and the larger elements of the original image.
+
 
 ## Style transfer as an optimisation problem
 
@@ -141,7 +146,7 @@ You can find my own TensorFlow implementation of this method of style transfer o
   <img src="{{site.url}}/assets/images/fast_style_transfer/style_images.png"/>
 </p>
 
-Each optimisation was run for ... iterations on a ... GPU and took approximately 2 minutes. Here are some of the style transfers I was able to generate:
+Each optimisation was run for 1000 iterations on a CPU and took approximately 1 hour. Here are some of the style transfers I was able to generate:
 
 
 <p align="center" style="margin-top:2em;margin-bottom:2em;">

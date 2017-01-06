@@ -8,13 +8,13 @@ description: "How can we perform a style transfer within seconds on a mobile dev
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 
-In my [previous post]({{ site.baseurl }}{% post_url 2016-12-27-style-transfer %})  I discussed the goal of transferring the style of one image onto the content of another. I gave an outline of the paper [A Neural Algorithm of Artistic Style](https://arxiv.org/abs/1508.06576) which formulated this task as an optimisation problem that could be solved using gradient descent. One of the drawbacks to this approach is the time taken to generate styled images. For each style transfer that we want to generate we need to solve a new optimisation problem. The following style transfers were generated on a GTX 1080 GPU and each took about 2 minutes to generate:
+In my [previous post]({{ site.baseurl }}{% post_url 2016-12-27-style-transfer %})  I discussed the goal of transferring the style of one image onto the content of another. I gave an outline of the paper [A Neural Algorithm of Artistic Style](https://arxiv.org/abs/1508.06576) which formulated this task as an optimisation problem that could be solved using gradient descent. One of the drawbacks to this approach is the time taken to generate styled images. For each style transfer that we want to generate we need to solve a new optimisation problem. Each of the following style transfers took **approximately 1 hour to generate** using a CPU and running for 1000 iterations:
 
 <p align="center" style="margin-top:2em;margin-bottom:2em;">
   <img src="{{site.url}}/assets/images/fast_style_transfer/gatys_results.png"/>
 </p>
 
-To generate them on a CPU would've taken around 36 hours each. So how do apps such as [Prisma](http://prisma-ai.com/) allow users to apply different styles to a content image and run this on a mobile device within seconds rather than hours?
+So how do apps such as [Prisma](http://prisma-ai.com/) allow users to apply different styles to a content image and run this on the CPU of a mobile device within seconds rather than hours?
 
 
 ## Real-time style transfer
@@ -145,7 +145,9 @@ You can find my own TensorFlow implementation of real-time style transfer [here]
   <img src="{{site.url}}/assets/images/fast_style_transfer/style_images.png"/>
 </p>
 
-Each network was trained with 80,000 training images taken from the [Microsoft COCO dataset](http://mscoco.org/) and resized to 256×256 pixels. Training was carried out for 100,000 iterations with a batch size of 4 and took approximately 12 hours on a GTX 1080 GPU. Here are some of the style transfers I was able to generate:
+Each network was trained with 80,000 training images taken from the [Microsoft COCO dataset](http://mscoco.org/) and resized to 256×256 pixels. Training was carried out for 100,000 iterations with a batch size of 4 and took approximately 12 hours on a GTX 1080 GPU.
+
+Using the trained networks to generate style transfers **took only 5 seconds on a CPU**. Here are some of the images I was able to generate:
 
 <p align="center" style="margin-top:2em;margin-bottom:2em;">
   <img src="{{site.url}}/assets/images/fast_style_transfer/tensorflow_results.png"/>
