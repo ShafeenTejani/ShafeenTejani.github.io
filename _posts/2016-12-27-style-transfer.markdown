@@ -154,4 +154,4 @@ Each optimisation was run for 1000 iterations on a CPU and took approximately 1 
 </p>
 
 
-If you found this post about style transfer interesting [click here to read my next post about performing style transfer in real-time]({{ site.baseurl }}{% post_url 2016-12-30-fast-style-transfer %}).
+If you found this post about style transfer interesting [click here to read my next post about performing style transfer in real-time]({{ site.baseurl }}{% post_url 2017-01-03-fast-style-transfer %}).

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Style Transfer in Real-Time"
-date:   2016-12-30 18:01:44 +0000
+date:   2017-01-03 18:01:44 +0000
 description: "How can we perform a style transfer within seconds on a mobile device?"
 ---
 
