@@ -146,7 +146,7 @@ You can find my own TensorFlow implementation of this method of style transfer o
   <img src="{{site.url}}/assets/images/fast_style_transfer/style_images.png"/>
 </p>
 
-Each optimisation was run for 1000 iterations on a CPU and took approximately 1 hour. Here are some of the style transfers I was able to generate:
+Each optimisation was run for 1000 iterations on a CPU and took approximately 2 hours. Here are some of the style transfers I was able to generate:
 
 
 <p align="center" style="margin-top:2em;margin-bottom:2em;">
