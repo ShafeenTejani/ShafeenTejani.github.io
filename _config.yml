@@ -23,7 +23,7 @@ author:
 
 # URL
 #url:                "https://AWEEKJ.github.io" # the base hostname & protocol for your site
-url:                "" # use this url when develop
+url:                "https://shafeentejani.github.io" # use this url when develop
 baseurl:            "" # the subpath of your site, e.g. /blog
 
 
