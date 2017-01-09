@@ -22,7 +22,7 @@ It's no surprise that neural networks are at the heart of this capability. The f
 
 ## Convolutional neural networks
 
-The most effective neural network architecture for performing object detection within images is the convolutional neural network. It works by detecting features at larger and larger scales within an image and using non-linear combinations of these feature detections to recognise objects. See my [earlier blog post]({{ site.baseurl }}{% post_url 2016-12-20-convolutional-neural-nets %}) for a more detailed explanation of these networks.
+The most effective neural network architecture for performing object recognition within images is the convolutional neural network. It works by detecting features at larger and larger scales within an image and using non-linear combinations of these feature detections to recognise objects. See my [earlier blog post]({{ site.baseurl }}{% post_url 2016-12-20-convolutional-neural-nets %}) for a more detailed explanation of these networks.
 
 In their paper, Gatys et. al show that if we take a convolutional neural network that has already been trained to recognise objects within images then that network will have developed some internal representations of the content and style contained within a given image. What's more, these representations will be independent from each other, so we can use the content representation from one image and style representation from another to generate a brand new image.
 
@@ -30,7 +30,7 @@ In their paper, Gatys et. al show that if we take a convolutional neural network
 
 One of the most popular benchmarks for image recognition algorithms today is the [ImageNet Large Scale Visual Recognition Challenge](http://image-net.org/challenges/LSVRC/2016/index) - where teams compete to create algorithms which classify objects contained within millions images into one of 1,000 different categories. All winning architectures in recent years have been some form of convolutional neural network - with the most recent winners even being able to surpass human level performance!
 
-In 2014, the winner of the ImageNet challenge was [a network created by the Visual Geometry Group](http://www.robots.ox.ac.uk/~vgg/research/very_deep/) (VGG) at Oxford University, achieving a classification error rate of only 7.0%. Gatys et. al use this network - which has been trained to be extremely effective at object detection - as a basis for trying to extract content and style representations from images.
+In 2014, the winner of the ImageNet challenge was [a network created by the Visual Geometry Group](http://www.robots.ox.ac.uk/~vgg/research/very_deep/) (VGG) at Oxford University, achieving a classification error rate of only 7.0%. Gatys et. al use this network - which has been trained to be extremely effective at object recognition - as a basis for trying to extract content and style representations from images.
 
 Here's a diagram of the VGG network:
 
