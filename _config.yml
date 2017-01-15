@@ -14,8 +14,8 @@ author:
   blurb:            "Interesting findings from my journey into the world of machine learning"
 
 # Google-analytics
-# google-analytics:
-#   id:               ""
+google-analytics:
+  id:               "UA-90395024-1"
 #
 # # Disqus
 # disqus:
