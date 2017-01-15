@@ -28,7 +28,7 @@ In their paper, Gatys et. al show that if we take a convolutional neural network
 
 ## VGG network
 
-One of the most popular benchmarks for image recognition algorithms today is the [ImageNet Large Scale Visual Recognition Challenge](http://image-net.org/challenges/LSVRC/2016/index) - where teams compete to create algorithms which classify objects contained within millions images into one of 1,000 different categories. All winning architectures in recent years have been some form of convolutional neural network - with the most recent winners even being able to surpass human level performance!
+One of the most popular benchmarks for image classification algorithms today is the [ImageNet Large Scale Visual Recognition Challenge](http://image-net.org/challenges/LSVRC/2016/index) - where teams compete to create algorithms which classify objects contained within millions images into one of 1,000 different categories. All winning architectures in recent years have been some form of convolutional neural network - with the most recent winners even being able to surpass human level performance!
 
 In 2014, the winner of the ImageNet challenge was [a network created by the Visual Geometry Group](http://www.robots.ox.ac.uk/~vgg/research/very_deep/) (VGG) at Oxford University, achieving a classification error rate of only 7.0%. Gatys et. al use this network - which has been trained to be extremely effective at object recognition - as a basis for trying to extract content and style representations from images.
 
