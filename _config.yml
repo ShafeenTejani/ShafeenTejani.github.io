@@ -18,8 +18,8 @@ google-analytics:
   id:               "UA-90395024-1"
 #
 # # Disqus
-# disqus:
-#   id:               ""
+disqus:
+  id:               "shafeentejani-github-io"
 
 # URL
 #url:                "https://AWEEKJ.github.io" # the base hostname & protocol for your site
